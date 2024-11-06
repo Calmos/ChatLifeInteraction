@@ -17,6 +17,10 @@
             const x = event.clientX;
             const y = event.clientY;
 
+            dot = document.getElementById("dot");
+            dot.style.top = y + "px";
+            dot.style.left = x + "px";
+
             fetch('https://your-backend-url.com/mousemove', {
                 method: 'POST',
                 headers: {
@@ -33,5 +37,6 @@
 </head>
 <body>
     <h1>Déplacez le curseur pour interagir</h1>
+    <div id="dot" style="width:20px; height:20px; border-width:20px; background-color:red; position:absolute;"></div>
 </body>
 </html>
