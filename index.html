@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Twitch Extension</title>
+    <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
+    <script>
+        let channelId = null;
+
+        // Twitch API listener pour obtenir l'identifiant du canal
+        Twitch.ext.onAuthorized((auth) => {
+            channelId = auth.channelId;
+        });
+
+        // Capture les mouvements de la souris et les envoie au backend
+        document.addEventListener('mousemove', (event) => {
+            const x = event.clientX;
+            const y = event.clientY;
+
+            fetch('https://your-backend-url.com/mousemove', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    channelId: channelId,
+                    x: x,
+                    y: y
+                })
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Déplacez le curseur pour interagir</h1>
+</body>
+</html>
